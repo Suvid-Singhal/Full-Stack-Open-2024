@@ -63,17 +63,17 @@ app.post('/api/persons', (request, response) => {
     }
     else{
         const person = {
-            id:Math.random()*5000,
+            id:Math.round(Math.random()*5000),
             name:newPerson.name,
             number:newPerson.number,
         }
-        if(persons.find(person => person.name.toLowerCase() === person.name.toLowerCase())){
+        if(persons.find(person => person.name.toLowerCase() === newPerson.name.toLowerCase())){
             return response.status(400).json({ 
                 error: 'name must be unique' 
             })
         }
         persons = persons.concat(person)
-        response.json(person)
+        return response.json(person)
         
     }
 })
